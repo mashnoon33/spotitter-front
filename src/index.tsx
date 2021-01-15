@@ -365,8 +365,8 @@ const App = () => {
           // Display the login page
           <Box margin={{ left: "large" }} width="medium">
             <SpotifyAuth
-              redirectUri="https://spotitter.netlify.app/callback"
-              clientID="1a70ba777fec4ffd9633c0c418bdcf39"
+              redirectUri="https://spotitter.netlify.app"
+              clientID="1eecbdd768c841b4aa1079f4b20cee61"
               scopes={[Scopes.userReadPrivate, "user-read-email"]} // either style will work
             />
           </Box>
