@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import data from "./projects";
 import { render } from "react-dom";
 import { Project } from "./projectModel";
@@ -7,11 +7,10 @@ import { SpotifyApiContext, Track, User } from "react-spotify-api";
 import { SpotifyAuth, Scopes } from "react-spotify-auth";
 import Cookies from "js-cookie";
 import "react-spotify-auth/dist/index.css"; // if using the included styles
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import {
   Box,
-  Button,
   Image,
   Grommet,
   Text,
@@ -19,24 +18,10 @@ import {
   ResponsiveContext,
   Card,
   CardHeader,
-  CardBody,
-  CardFooter,
   TextInput,
   Keyboard,
 } from "grommet";
 
-import {
-  Github,
-  DocumentPdf,
-  Linkedin,
-  Contact,
-  FormNextLink,
-  Android,
-  Apple,
-  Globe,
-} from "grommet-icons";
-import Masonry from "react-masonry-component";
-import { any } from "prop-types";
 
 const queryClient = new QueryClient();
 
@@ -132,15 +117,7 @@ const Projects = (projects: Project[]) => {
     };
   }
 
-  function getStatusColor(text: string) {
-    if (text.includes("alpha")) {
-      return "status-error";
-    } else if (text.includes("beta")) {
-      return "status-warning";
-    } else {
-      return "status-ok";
-    }
-  }
+
 
   return (
     <ResponsiveContext.Consumer>
@@ -268,7 +245,6 @@ const UserCard = (data: UserModel) => {
     </Box>
   );
 };
-const Name = (data: string) => <h1>{data}</h1>;
 
 const App = () => {
   const token = Cookies.get("spotifyAuthToken");
@@ -276,7 +252,7 @@ const App = () => {
   const [ data, setData ] = React.useState();
 
   function getData(name: string)  {
-    fetch('http://localhost:5000/songs?handle='+ name.toLowerCase()).then(res => {
+    fetch('https://spotitter.mattz.space/songs?handle='+ name.toLowerCase()).then(res => {
         const ressss = res.json()
         ressss.then(final => setData(final))
          
@@ -309,7 +285,7 @@ const App = () => {
             ></TextInput>
           </Keyboard>
 
-          {value.length != 0 ? <Text>⏎ Press enter to submit</Text> : null}
+          {value.length !== 0 ? <Text>⏎ Press enter to submit</Text> : null}
           <Paragraph color="black" size="xxlarge" margin={{ left: "5px" }}>
             <span
               style={{
@@ -389,7 +365,7 @@ const App = () => {
           // Display the login page
           <Box margin={{ left: "large" }} width="medium">
             <SpotifyAuth
-              redirectUri="http://localhost:3000/callback"
+              redirectUri="https://spotitter.netlify.app/callback"
               clientID="1a70ba777fec4ffd9633c0c418bdcf39"
               scopes={[Scopes.userReadPrivate, "user-read-email"]} // either style will work
             />
